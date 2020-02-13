@@ -2,7 +2,8 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "webpack --mode=development",
-    "test": "eslint ./src/*.js"
+    "test": "eslint ./src/*.js",
+    "heroku-prebuild": "npm install --dev"
   },
   "name": "fronttestmail",
   "homepage": "https://mpolyakowa.github.io/FrontTestMailru/",
