@@ -3,12 +3,19 @@ sudo: false
 language: node_js
 node_js:
   - "stable"
+cache:
+  directories:
+  - node_modules
+script:
+  - npm run test
+  - npm run build
 
 deploy:
   provider: heroku
   app: "telephone-verify"
   api_key:
     secure: "aee1211a-1d16-4114-9c3c-76625cbbefe9"
+  
 
 branches:
   only:
