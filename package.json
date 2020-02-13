@@ -5,6 +5,7 @@
     "test": "eslint ./src/*.js"
   },
   "name": "fronttestmail",
+  "homepage": "https://mpolyakowa.github.io/FrontTestMailru/",
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
