@@ -1,6 +1,7 @@
 {
   "scripts": {
     "test": "jest && eslint ./src/*.js",
+    "deploy": "gh-pages-deploy",
     "start": "webpack-dev-server",
     "build": "webpack --mode=development",
     "lint": "npm run lint:js",
@@ -43,6 +44,19 @@
   "author": "Marina Polyakova",
   "license": "ISC",
   "description": "test task for mail.ru",
+  "gh-pages-deploy": {
+    "staticpath": "dist",
+    "cname": "nope.org",
+    "prep": [
+      "build-sass",
+      "optimize-img"
+    ],
+    "commit": "a custom commit message",
+    "post": [
+      "clean-source"
+    ],
+    "noprompt": false
+  },
   "husky": {
     "hooks": {
       "pre-commit": "npm run lint"
