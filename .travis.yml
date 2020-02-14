@@ -1,5 +1,3 @@
-sudo: false
-
 language: node_js
 node_js:
   - "stable"
@@ -11,12 +9,10 @@ script:
   - npm run build
 
 deploy:
-  provider: heroku
-  app: "telephone-verify"
-  api_key:
-    secure: "aee1211a-1d16-4114-9c3c-76625cbbefe9"
-  
-
-branches:
-  only:
-    - master
+  provider: pages
+  skip_cleanup: true
+  github_token: $repo_token
+  local_dir: build
+  on:
+    branch:
+      - master
