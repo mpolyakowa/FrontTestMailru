@@ -1,10 +1,10 @@
 {
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "test": "jest && eslint ./src/*.js",
     "start": "webpack-dev-server",
     "build": "webpack --mode=development",
-    "test": "jest && eslint ./src/*.js"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "name": "fronttestmail",
   "homepage": "https://mpolyakowa.github.io/FrontTestMailru/",
