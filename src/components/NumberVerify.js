@@ -1,11 +1,13 @@
-function Numbers(props) {
+export default function Numbers(props) {
   const warns = [];
   const { mask } = props;
   function onKeyPress(event) {
     const { target } = event;
     const warning = document.getElementById('warning');
     const oldStyle = event.target.style;
-    target.value = event.key;
+    if (event.keyCode !== 13) {
+      target.value = event.key;
+    }
     if (!event.key.match(/[0-9]/)) {
       target.style.border = '1px rgb(255, 0, 0) solid';
       if (!warns.includes(target.id)) {
@@ -25,32 +27,45 @@ function Numbers(props) {
   }
   const container = document.getElementById('container');
   const elems = mask.split('');
+  let len = 0;
   for (let i = 0; i < elems.length; i += 1) {
     const x = elems[i];
     const block = document.createElement('div');
     if (x.match(/\d/)) {
-      block.setAttribute('class', 'greyField');
-      block.innerHTML += x;
-      container.appendChild(block);
+      if (container) {
+        block.setAttribute('class', 'greyField');
+        block.innerHTML += x;
+        container.appendChild(block);
+      }
+      len += 1;
     } else if (x === 'I') {
-      block.setAttribute('class', 'whiteField');
-      const input = document.createElement('input');
-      input.setAttribute('type', 'text');
-      input.setAttribute('placeholder', '_');
-      input.setAttribute('maxlength', '1');
-      input.setAttribute('value', '');
-      input.setAttribute('id', i.toString());
-      block.appendChild(input);
-      container.appendChild(block);
+      if (container) {
+        block.setAttribute('class', 'whiteField');
+        const input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('placeholder', '_');
+        input.setAttribute('maxlength', '1');
+        input.setAttribute('value', '');
+        input.setAttribute('id', i.toString());
+        block.appendChild(input);
+        container.appendChild(block);
+      }
+      len += 1;
     } else if (x === 'X') {
-      block.setAttribute('class', 'greyField');
-      block.innerHTML += 'X';
-      container.appendChild(block);
+      if (container) {
+        block.setAttribute('class', 'greyField');
+        block.innerHTML += 'X';
+        container.appendChild(block);
+      }
+      len += 1;
     } else if (x === '*') {
-      block.setAttribute('class', 'greyField');
-      block.innerHTML += '•';
-      container.appendChild(block);
-    } else {
+      if (container) {
+        block.setAttribute('class', 'greyField');
+        block.innerHTML += '•';
+        container.appendChild(block);
+      }
+      len += 1;
+    } else if (container) {
       container.innerHTML += x;
     }
   }
@@ -63,6 +78,13 @@ function Numbers(props) {
   for (let i = 0; i < fields.length; i += 1) {
     fields[i].onkeypress = onKeyPress;
   }
+  if (len !== 11) {
+    if (container) {
+      container.style.opacity = 0;
+      warning.innerHTML = 'Маска некорректна';
+      warning.style.opacity = 1;
+    }
+    return false;
+  }
+  return true;
 }
-
-export default Numbers;
